@@ -1,0 +1,13 @@
+services:
+  inventory:
+    build: .
+    ports:
+      - "4000:4000"
+    environment:
+      PORT: 4000
+      DB_PATH: /data/inventory.db
+    volumes:
+      - inventory_data:/data
+    restart: unless-stopped
+volumes:
+  inventory_data:

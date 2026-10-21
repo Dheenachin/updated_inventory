@@ -1,0 +1,15 @@
+# Cotton Mill Management System — cPanel upload package
+
+## cPanel setup
+1. Upload and extract this ZIP directly into the Node.js Application Root (inventory-app). The package.json, app.js, server/, src/, and index.html should be directly inside that folder, not inside an extra nested folder.
+2. In cPanel Node.js app settings, use Node.js 22.x, Production mode, application root `inventory-app`, URL `inventory.ntan.in`, startup file `app.js`.
+3. Run NPM Install from the cPanel Node.js application page.
+4. Build the frontend with `npm run build` using cPanel Terminal from the application root if Terminal is available.
+5. Set environment variables in cPanel, not in source files: NODE_ENV=production; DB_PATH=/home/CPANEL_USERNAME/cotton-mill-data/inventory.db; ADMIN_USER=your unique admin username; ADMIN_PASSWORD=a unique password of at least 14 characters. Replace CPANEL_USERNAME with the actual account username.
+6. Create the `cotton-mill-data` folder outside public_html and ensure the app can write to it. Set DB_PATH before first production start.
+7. Restart the Node.js application and test HTTPS, login, stock operations, exports, and a backup/restore test before entering real business data.
+
+## Notes
+- This package does not include node_modules, built dist files, or any database. cPanel must install dependencies and the frontend must be built.
+- better-sqlite3 is a native module; installation may fail if the host lacks a compatible prebuilt binary or build tools. If so, contact MilesWeb support rather than changing database packages blindly.
+- Do not expose database files or secrets under public_html. Keep independent off-host backups.
